@@ -1,11 +1,9 @@
 require_relative './db/config'
-require_relative './app/models/student'
 require_relative './app/models/teacher'
+require_relative './app/models/student'
+require_relative './app/models/students_teachers'
 
-# p Teacher.all
-# # puts Teacher.methods.sort
 
-# p Student.first
 
 # teacher_count = Teacher.all.length
 
@@ -14,10 +12,17 @@ require_relative './app/models/teacher'
 #   # p Teacher.all.sample.id
 #   student.update(teacher_id: rand(1..teacher_count) ) }
 
-# p Student.first
+p sample_student = Student.all.sample
 
-p sample_student = Student.all[ rand(Student.all.length) ]
+p sample_teacher = Teacher.all.sample
 
-p sample_teacher = sample_student.teacher
+Student.all.each do |student|
+  teacher_array = Teacher.all.dup
+  rand(1..4).times { 
+    student.teachers << teacher_array.delete_at(rand(teacher_array.length))
+    # student.teachers << teacher_array.sample
+  }
 
-p sample_teacher.students
+end
+
+puts Student.all.sample.teachers

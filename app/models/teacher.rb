@@ -1,5 +1,5 @@
 class Teacher < ActiveRecord::Base
-  has_many :students
+  has_and_belongs_to_many :students
   validates :email, :uniqueness => true
   validate :name, :uniqueness => true # why validate works here but validates works for age in student.rb, both are methods.
 
